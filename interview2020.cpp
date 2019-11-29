@@ -312,7 +312,20 @@ merge : http://www.cplusplus.com/reference/list/list/merge/
 remove : http://www.cplusplus.com/reference/list/list/remove/
 *********************************************************************** IMPORTANT STL ****************************************************************************/
 
+/*********************************************************************** CPU SCHEDULING ****************************************************************************
+ - Process is program in excecution
+ - Attributes of a process (also called context of a process)
+    - Process Id : A unique identifier assigned by the operating system
+    - Process State : Ready,runnable,blocked etc.
+    - CPU Registers : Like the program counter 
+    - I/O status info : For example devices allocated to the process.
+    - CPU Scheduling info : for example priority associated with the process 
+    - Every process has its own PCB(process control block)
 
+ - States of process : new,ready,running,wait,complete,suspended ready,suspended block
+ - Context Switching : Process of saving the context of one prorcess and loading the context of another process is known as context switching.
+
+*********************************************************************** CPU SCHEDULING ***************************************************************************/
 
 
 /********************************************************************** CODE - HERE ******************************************************************************/
