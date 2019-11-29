@@ -226,7 +226,41 @@ Interface : Like a class, an interface can have methods and variables, but the m
  - All the methods are public and abstract. And all the fields are public, static, and final.
  - It is used to achieve multiple inheritance.
  - It is used to achieve loose coupling.
+ - Since all data fields are public static final in an interface it must be initialized then and there itself.
+ - Methods and data fields can have one of the four access specifiers private,default(when nothing in specified),protected,public. 
+   But classes and interface can have only two access specifier public and default. But nested classes/interfaces can have all four.
+ - Comparator interface :
+    class cmp implements Comparator<Obj> 
+    { 
+        // Used for sorting in ascending order of 
+        // roll number 
+        public int compare(Obj a,Obj b) 
+        { 
+            return custom logic; 
+        } 
+    } 
+ - When we define the method of the interface in a class implementing the interface, we have to give it public access as child can't assign the weaker access to methods
+
 ************************************************************************* Interfaces ******************************************************************************/
+
+/****************************************************************** Abstract Classes ******************************************************************************
+ - Using keyword abstract a class can be made abstract in Java
+ - An instance of abstract class cannot be made, but we can have reference of abstract class type though.
+ - An abstract class can have constructor, and a constructor of abstract class is called when an instance of a inherited class is created.
+ - We can have an abstract class without any abstract method, this allows us to only create classes that can only be inherited and not instantiated.
+ -                                                      Difference between abstract class and interface
+                        Interface                                                                   Abstract Class
+    --> Interface can only have abstract methods                            | --> Abstract class can have both abstract and non-abstract methods
+    --> Variables declared in interface are final by default.               | --> Abstract class can contain non-final variables
+    --> Interface only has static and final variables.                      | --> Abstract class can have final,non-final,static,non-static variables
+    --> Interface is inherited using implements keyword.                    | --> Abstract class is inherited using extends keyword
+    --> Interface can inherit interface only(Using extend keyword)          | --> Whereas abstract class can inherit both class and interface
+    --> Interface members are public,static and final                       | --> Abstract class members can have any access type
+
+ - 
+                                                                            
+****************************************************************** Abstract Classes ******************************************************************************/
+
 
 /*********************************************************************** IMPORTANT STL ****************************************************************************
 Policy Based Data Structure
