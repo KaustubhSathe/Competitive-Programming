@@ -239,16 +239,63 @@ typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_upda
 order_of_key (val): returns the no. of values less than val
 find_by_order (k): returns the iterator to kth largest element.(0-based)
 
+Writing custom comparators for built-in data structures like set,multiset,priority_queue,map,multimap
+struct cmp{
+    !!!Always use const while defining custom comparators,otherwise such errors happen std::pair<int, int>&’ to ‘const std::pair<int, int>
+    bool operator()(const T& a,const T& b){
+        return custom logic;
+    }
+};
+Useage : priority_queue<T,vector<T>,cmp>, set<T,cmp>, multiset<T,cmp>, map<T,T,cmp>, multimap<T,T,cmp>
+
+Functions : 
+1. empty() : common to all containers
+2. size() : commmon to all containers
+3. top() : priority_queue,stack
+4. push() : priority_queue,stack
+5. emplace()/emplace_back()/emplace_front(): all containers except list back() and front() to be used according to data structure
+6. pop() : priority_queue/stack
+7. [] random access : deque,vector
+8. front() : queue,list,
+9. back() : queue,list
 
 
+List related functions(important for linked list problems)
+front() : returns reference to front element
+back() : returns reference to back element
+emplace_front(),push_front(),pop_front()
+emplace_back(),push_back(),pop_back()
 
+Erase : http://www.cplusplus.com/reference/list/list/erase/ 
 
+Splice : entire list (1) void splice (iterator position, list& x); pq.spl
+         single element (2) void splice (iterator position, list& x, iterator i);
+         element range (3) void splice (iterator position, list& x, iterator first, iterator last);
+
+reverse : http://www.cplusplus.com/reference/list/list/reverse/
+sort : http://www.cplusplus.com/reference/list/list/sort/
+merge : http://www.cplusplus.com/reference/list/list/merge/
+remove : http://www.cplusplus.com/reference/list/list/remove/
 *********************************************************************** IMPORTANT STL ****************************************************************************/
 
 
 
 
 /********************************************************************** CODE - HERE ******************************************************************************/
-int main(){
 
+int main(){
+    // priority_queue<pair<int,int>,vector<pair<int,int>>,cmp> pq;
+    list<int> pq1,pq2;
+    for(int i = 0;i<10;i++){
+        pq1.emplace_back(i);
+        pq2.emplace_back(i*i);
+    }
+    for(auto it = pq1.begin();it != pq1.end();it++){
+        if(*it == 0){
+            it = pq1.erase(it);
+        }
+    }
+    cout<<pq1.front()<<endl;
+    
+    return 0;
 }
