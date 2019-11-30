@@ -347,7 +347,7 @@ Solution : First get the centroid tree of the given tree.While decomposing the g
     }
 */
 
-/* https://codeforces.com/contest/161/problem/D
+/* 4. https://codeforces.com/contest/161/problem/D
  Solution : There is dynamic programming solution to this problem(see this https://codeforces.com/contest/161/submission/66035427)
             But let's solve this using centroid decomposition. While decomposing the given tree maintain an array called
             d[50000+5] for every centroid (you don't actually need different array for every centroid as it won't be memory 
@@ -356,9 +356,91 @@ Solution : First get the centroid tree of the given tree.While decomposing the g
             in the original tree(not in the centroid tree), and if we are at lvl = x then add cnt += d[k-x] to the global answer,and after adding 
             update the given d[50000+5] array.
 
-            
-
+    int n,k;
+    unordered_map<int,int> d;
+    lli ans;
+    vector<int> adj[1000000+5];
+    vector<int> centroid[1000000+5];
+    bool is_centroid[1000000+5];
+    int sz[1000000+5],par[1000000+5],nn;
+    vector<pii> disCentroidParent[100000+5];
+    void dfs(int u,int p = -1){
+        sz[u] = 1;
+        for(auto x : adj[u]){
+            if(x == p || is_centroid[x])continue;
+            dfs(x,u);
+            sz[u] += sz[x];
+        }
+    }
+    void dfs2(int u,int p,int lvl,int rootNode){
+        disCentroidParent[u].pb(mp(rootNode,lvl));
+        for(auto x : adj[u]){
+            if(x == p || is_centroid[x])continue;
+            dfs2(x,u,lvl+1,rootNode);
+        }
+    }
+    int get_centroid(int u,int p = -1){
+        for(auto x : adj[u]){
+            if(x == p || is_centroid[x])continue;
+            if(sz[x] > nn/2) return get_centroid(x,u);
+        }
+        return u;
+    }
+    
+    void dfsCross(int u,int p,int lvl){
+        ans += d[k - lvl];
+        for(auto x : adj[u]){
+            if(x == p || is_centroid[x])continue;
+            dfsCross(x,u,lvl + 1);
+        }
+    }
+    void dfsAdd(int u,int p,int lvl){
+        d[lvl]++;
+        for(auto x : adj[u]){
+            if(x == p || is_centroid[x])continue;
+            dfsAdd(x,u,lvl + 1);
+        }
+    }
+    int decompose(int u){
+        dfs(u);  
+        nn = sz[u];
+        int p = get_centroid(u);
+        is_centroid[p] = true;
+        dfs2(p,p,0,p);
+        d.clear();d[0] = 1;
+        for(auto x : adj[p]){
+            if(is_centroid[x])continue;
+            dfsCross(x,p,1);
+            dfsAdd(x,p,1);
+        } 
+        for(auto x : adj[p]){
+            if(is_centroid[x])continue;
+            int q = decompose(x);
+            centroid[p].pb(q);
+            centroid[q].pb(p);
+        }
+        return p;
+    }
+    
+    int main(){
+        fastio;
+        // freopen("input.txt", "r", stdin);
+        // freopen("output.txt", "w", stdout);
+        cin>>n>>k;
+        for(int i = 0;i<n-1;i++){
+            int u,v;cin>>u>>v;
+            adj[u].pb(v);
+            adj[v].pb(u);
+        }
+        int root_centroid = decompose(1);
+        cout<<ans<<endl;
+        
+        
+        return 0;
+    }
 */
+
+
 
 
 
