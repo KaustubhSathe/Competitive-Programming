@@ -325,6 +325,32 @@ remove : http://www.cplusplus.com/reference/list/list/remove/
  - States of process : new,ready,running,wait,complete,suspended ready,suspended block
  - Context Switching : Process of saving the context of one prorcess and loading the context of another process is known as context switching.
 
+ - PCB (Process Control Block) is used to track the process excecution status. Each block of memory contains information about the process state, program counter,
+   stack pointer, status of opened files, scheduling algorithms, etc. All these information is required and must be saved when the process is switched from 
+   one state to another. When the process made transitions from one state to another, the operating system must update information in the process’s PCB.
+ - Process Table is an array of PCBs that means logically contains a PCB for all the current running process in the system.
+ - PCB stores the following properties of a process : 
+    --> Pointer : It is a stack pointer which is required to be saved when the process is switched from one state to another to retain the current position of the process.
+    --> Process state – It stores the respective state of the process.
+    --> Process number – Every process is assigned with a unique id known as process ID or PID which stores the process identifier.
+    --> Program counter – It stores the counter which contains the address of the next instruction that is to be executed for the process.
+    --> Register – These are the CPU registers which includes: accumulator, base, registers and general purpose registers.
+    --> Memory limits – This field contains the information about memory management system used by operating system. 
+        This may include the page tables, segment tables etc.
+    --> Open files list – This information includes the list of files opened for a process.
+    --> The process control block stores the register content also known as execution content of the processor when it was blocked from running.
+        This execution content architecture enables the operating system to restore a process’s execution context when the process returns to the running state. 
+        When the process made transitions from one state to another, the operating system update its information in the process’s PCB. 
+        The operating system maintains pointers to each process’s PCB in a process table so that it can access the PCB quickly.
+
+ - Long Term or job scheduler It brings the new process to the ‘Ready State’. It controls Degree of Multi-programming, i.e., number of process present in ready 
+   state at any point of time.It is important that the long-term scheduler make a careful selection of both IO and CPU bound process.
+ - Short term or CPU scheduler: It is responsible for selecting one process from ready state for scheduling it on the running state. Note: Short-term scheduler only selects the process to schedule it doesn’t load the process on running.
+   Dispatcher is responsible for loading the process selected by Short-term scheduler on the CPU (Ready to Running State) Context switching is done by dispatcher only. A dispatcher does the following: Switching context.Switching to user mode.Jumping to the proper location in the newly loaded program.
+ - Medium-term scheduler It is responsible for suspending and resuming the process. It mainly does swapping (moving processes from main memory to disk and
+   vice versa). Swapping may be necessary to improve the process mix or because a change in memory requirements has overcommitted available memory,requiring memory to be freed up.
+
+ - 
 *********************************************************************** CPU SCHEDULING ***************************************************************************/
 
 
@@ -346,3 +372,5 @@ int main(){
     
     return 0;
 }
+
+
