@@ -350,7 +350,38 @@ remove : http://www.cplusplus.com/reference/list/list/remove/
  - Medium-term scheduler It is responsible for suspending and resuming the process. It mainly does swapping (moving processes from main memory to disk and
    vice versa). Swapping may be necessary to improve the process mix or because a change in memory requirements has overcommitted available memory,requiring memory to be freed up.
 
- - 
+ - Arrival Time: Time at which the process arrives in the ready queue.
+ - Completion Time: Time at which process completes its execution.
+ - Burst Time: Time required by a process for CPU execution.
+ - Turn Around Time: Time Difference between completion time and arrival time.
+ - Turn Around Time = Completion Time – Arrival Time
+ - Waiting Time(W.T): Time Difference between turn around time and burst time.
+ - Waiting Time = Turn Around Time – Burst Time
+
+ - Job Scheduling Algorithms : 
+    --> FCFS (First Come First Served) : Simplest scheduling algorithm that schedules according to arrival times of processes.
+    First come first serve scheduling algorithm states that the process that requests the CPU first is allocated the CPU first.
+    --> SJF (Shortest Job First) : Process which have the shortest burst time are scheduled first.If two processes have the same bust time then FCFS is used to break the tie. It is a non-preemptive scheduling algorithm.
+    --> LJF (Longest Job First) : It is similar to SJF scheduling algorithm. But, in this scheduling algorithm, we give priority to the process having the longest burst time.
+    --> Shortest Remaining Time First (SRTF): It is preemptive mode of SJF algorithm in which jobs are schedule according to shortest remaining time.
+    --> Longest Remaining Time First (LRTF): It is preemptive mode of LJF algorithm in which we give priority to the process having largest burst time remaining.
+    --> Round Robin Scheduling: Each process is assigned a fixed time(Time Quantum/Time Slice) in cyclic way.It is designed especially for the time-sharing system. The ready queue is treated as a circular queue. The CPU scheduler goes around the ready queue, allocating the CPU to each process for a time interval of up to 1-time quantum.
+    --> Priority Based scheduling (Non-Preemptive): In this scheduling, processes are scheduled according to their priorities, i.e., highest priority process is scheduled first. If priorities of two processes match, then schedule according to arrival time. Here starvation of process is possible.
+    --> Highest Response Ratio Next (HRRN): In this scheduling, processes with highest response ratio is scheduled. This algorithm avoids starvation.
+ 
+ 
+ - A Context switch is the time spent between two processes (i.e., bringing a waiting process into execution and sending an executing process into waiting state). This happens in multitasking.The operating system must bring the state information if waiting process into memory and save the state information of the currently running process.
+ - Convoy Effect : Convoy Effect is phenomenon associated with the First Come First Serve (FCFS) algorithm, in which the whole Operating System slows down due to few slow processes.
+
+
+ - Belady Anomaly in Page Replacement Algorihtms
+ - In Operating System, process data is loaded in fixed sized chunks and each chunk is referred to as a page. 
+   The processor loads these pages in the fixed sized chunks of memory called frames. Typically the size of each page 
+   is always equal to the frame size.
+
+
+
+
 *********************************************************************** CPU SCHEDULING ***************************************************************************/
 
 

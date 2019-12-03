@@ -42,6 +42,7 @@ int decompose(int u){
     for(auto x : adj[p]){
         if(is_centroid[x])continue;
         int q = decompose(x);
+        par[q] = p;
         centroid[p].pb(q);
         centroid[q].pb(p);
     }
@@ -438,6 +439,13 @@ Solution : First get the centroid tree of the given tree.While decomposing the g
         
         return 0;
     }
+*/
+
+
+/* 5. IOI 2011 (Race) 
+ Solution : Same as the above problem only weighted edges used here.
+
+ 
 */
 
 
