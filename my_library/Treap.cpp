@@ -184,12 +184,6 @@ void range_update(Node* t,int l,int r,int val){
 
 
 
-
-
-
-
-
-
 int main(){
     item* treap = nullptr;
     for(int i = 1;i<=10;i++){

@@ -442,12 +442,12 @@ Solution : First get the centroid tree of the given tree.While decomposing the g
 */
 
 
-/* 5. IOI 2011 (Race) 
- Solution : Same as the above problem only weighted edges used here.
+/* 5. https://www.spoj.com/problems/QTREE5/
+Solution : Just keep a multiset for each centroid, and solve accordingly.
 
  
-*/
 
+*/
 
 
 

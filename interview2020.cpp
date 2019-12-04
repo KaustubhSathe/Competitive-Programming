@@ -378,6 +378,12 @@ remove : http://www.cplusplus.com/reference/list/list/remove/
  - In Operating System, process data is loaded in fixed sized chunks and each chunk is referred to as a page. 
    The processor loads these pages in the fixed sized chunks of memory called frames. Typically the size of each page 
    is always equal to the frame size.
+ - A page fault occurs when a page is not found in the memory, and needs to be loaded from the disk. 
+   If a page fault occurs and all memory frames have been already allocated, then replacement of a page in memory is 
+   required on the request of a new page. This is referred to as demand-paging. The choice of which page to replace is 
+   specified by a page replacement algorithms. The commonly used page replacement algorithms are FIFO, LRU, optimal page 
+   replacement algorithms etc.
+ - 
 
 
 
