@@ -4,7 +4,6 @@ using namespace std;
 #define N 100005 
 
 int lpf[N]; 
-
 // Function to calculate least 
 // prime factor of each number 
 void least_prime_factor() 

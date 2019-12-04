@@ -1,61 +1,50 @@
 #include <cstdio>
-#include <cstdlib>
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <fstream>
-#include <vector>
-#include <algorithm>
 #include <cstring>
-#include <queue>
-#include <set>
-#include <string>
-#include <map>
-#include <cmath>
-
-using namespace std;
-
-unsigned char visited[1000010];
-vector<int> primes;
-
-int main() {
-    // calc prime list
-    for (int i = 2; i <= 1000000; i++) {
-        if (!visited[i]) {
-            primes.push_back(i);
-            for (int j = i; j <= 1000000; j += i) {
-                visited[j] = 1;
-            }
-        }
-    }
-    while (true) {
-        memset(visited, 0, sizeof(visited));
-        string K, L;
-        int LNum;
-        cin >> K >> L;
-        if (K == "0" && L == "0") {
-            break;
-        }
-        LNum = atoi(L.c_str());
-        int answer = 1;
-        for (int i = 0; i < primes.size() && primes[i] < LNum; i++) {
-            // divide operation
-            int KSeg = 0;
-            for (int j = 0; j < K.length(); j++) {
-                KSeg *= 10;
-                KSeg += K[j] - '0';
-                KSeg %= primes[i];
-            }
-            if (KSeg == 0) {
-                answer = primes[i];
-                break;
-            }
-        }
-        if (answer > 1) {
-            cout << "BAD " << answer << endl;
-        } else {
-            cout << "GOOD" << endl;
-        }
-    }
-    return 0;
+const int mod = 1000000, maxx = 1000001;
+int len, num[20], tot, prime[maxx], l;
+char str[123];
+bool vis[maxx];
+int main()
+{
+	for(int i = 2; i < maxx; ++i)
+	{
+		if(!vis[i])
+			prime[tot++] = i;
+		for(int j = 0; j < tot && (long long)i * prime[j] < maxx; ++j)
+		{
+			vis[i * prime[j]] = 1;
+			if(i % prime[j] == 0)
+				break;
+		}
+	}
+	while(scanf("%s%d", str, &l) == 2)
+	{
+		int slen = strlen(str);
+		len = 0;
+		for(int i = slen - 1; i >= 0; i -= 6)
+		{
+			num[len] = 0;
+			for(int j = i < 5 ? i : 5; j >= 0; --j)
+				num[len] = (num[len] << 3) + (num[len] << 1) + str[i - j] - '0';
+			++len;
+		}
+		if(len == 1 && !num[0] && !l)
+			break;
+		bool flag = 0;
+		for(int i = 0; i < tot && prime[i] < l; ++i)
+		{
+			long long ret = 0;
+			for(int j = len - 1; j >= 0; --j)
+				ret = (ret * mod + num[j]) % prime[i];
+			if(!ret)
+			{
+				flag = 1;
+				printf("BAD %d\n", prime[i]);
+				break;
+			}
+		}
+		if(!flag)
+			puts("GOOD");
+	}
+	return 0;
 }
