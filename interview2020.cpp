@@ -383,12 +383,50 @@ remove : http://www.cplusplus.com/reference/list/list/remove/
    required on the request of a new page. This is referred to as demand-paging. The choice of which page to replace is 
    specified by a page replacement algorithms. The commonly used page replacement algorithms are FIFO, LRU, optimal page 
    replacement algorithms etc.
- - 
-
-
-
-
+ - Generally, on increasing the number of frames to a process’ virtual memory, its execution becomes faster as less number
+   of page faults occur. Sometimes the reverse happens, i.e. more number of page faults occur when more frames are 
+   allocated to a process. This most unexpected result is termed as Belady’s Anomaly.
+ - Bélády’s anomaly is the name given to the phenomenon where increasing the number of page frames results in an increase 
+   in the number of page faults for a given memory access pattern.
 *********************************************************************** CPU SCHEDULING ***************************************************************************/
+
+/*********************************************************************** PROCESS SYNCHRONIZATION ***************************************************************************
+ - Race Condition : When more than one processes are executing the same code or accessing the same memory or any shared variable in that condition there is a
+   possibility that the output or the value of the shared variable is wrong so for that all the processes doing race to say that my output is correct this condition 
+   known as race condition. 
+ - Critical Section Problem : Critical section is a code segment that can be accessed by only one process at a time. Critical section contains shared variables which need to be synchronized to maintain consistency of data variables.
+ - Any solution to the critical section problem must satisfy three requirements: Mutual exclusion,progress and bounded waiting.
+ - Processes can communicate with each other using two ways : shared memory, message passing
+ - Communication between processes using shared memory requires processes to share some variable and it completely depends on how programmer will implement it.
+ - https://www.geeksforgeeks.org/inter-process-communication-ipc/
+ - Methods in IPC : 
+    --> Pipes : This allows flow of data in one direction only. Analogous to simplex systems (Keyboard). Data from the output is usually buffered until input process receives it which must have a common origin.
+    --> Names Pipes : This is a pipe with a specific name it can be used in processes that don’t have a shared common process origin. E.g. is FIFO where the details written to a pipe is first named.
+    --> Message Queuing : This allows messages to be passed between processes using either a single queue or several message queue. This is managed by system kernel these messages are coordinated using an API.
+    --> Semaphores : This is used in solving problems associated with synchronization and to avoid race condition. These are integer values which are greater than or equal to 0.
+    --> Shared Memory : This allows the interchange of data through a defined area of memory. Semaphore values have to be obtained before data can get access to shared memory.
+    --> Sockets : This method is mostly used to communicate over a network between a client and a server. It allows for a standard connection which is computer and OS independent.
+
+
+ 1. IPC through shared memory https://www.geeksforgeeks.org/ipc-shared-memory/ : IPC through shared memory is a concept where two or more process can access the common memory. And communication is done via this shared memory where changes made by one process can be viewed by another process.
+    The problem with pipes, fifo and message queue – is that for two process to exchange information. The information has to go through the kernel.
+ 2. IPC using message queue https://www.geeksforgeeks.org/ipc-using-message-queues/ : A message queue is a linked list of messages stored within the kernel and identified by a message queue identifier. A new queue is created or an existing queue opened by msgget(). 
+    
+    Semaphores in operating system : Semaphore is simply a variable which is non-negative and shared between threads. This variable is used to solve the critical section problem and to achieve process synchronization in the multiprocessing environment.
+    Binary Semaphore – This is also known as mutex lock. It can have only two values – 0 and 1. Its value is initialized to 1. It is used to implement the solution of critical section problem with multiple processes.
+    Counting Semaphore – Its value can range over an unrestricted domain. It is used to control access to a resource that has multiple instances.
+
+    https://www.geeksforgeeks.org/mutex-vs-semaphore/
+
+
+
+*********************************************************************** PROCESS SYNCHRONIZATION ***************************************************************************/
+
+
+
+
+
+
 
 
 /********************************************************************** CODE - HERE ******************************************************************************/
