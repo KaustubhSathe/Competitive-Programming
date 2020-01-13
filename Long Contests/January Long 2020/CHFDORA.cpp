@@ -73,30 +73,65 @@ lli P(int n,int r){
     return mulmod(fact[n],fact_modinv[n-r],1ll*MOD);
 }
 /*-----------------------------START----------------------------- */
+int n,m;
 
 int main(){
     fastio;
     // freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
-    string s;cin>>s;
-    int n = s.length();
-    vector<int> d1(n);
-    for (int i = 0, l = 0, r = -1; i < n; i++)
-    {
-        int k = (i > r) ? 1 : min(d1[l + r - i], r - i + 1);
-        while (0 <= i - k && i + k < n && s[i - k] == s[i + k])
-        {
-            k++;
+    int tc;
+    cin>>tc;
+    while(tc--){
+        cin>>n>>m;
+        lli mat[n+5][m+5];
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<m;j++){
+                cin>>mat[i][j];
+            }
         }
-        d1[i] = k--;
-        if (i + k > r)
-        {
-            l = i - k;
-            r = i + k;
+        lli dH[n+5][m+5],dV[n+5][m+5];
+        for(int row = 0;row<n;row++){
+            for (int i = 0, l = 0, r = -1; i < m; i++)
+            {
+                int k = (i > r) ? 1 : min(dH[row][l + r - i], r - i + 1ll);
+                while (0 <= i - k && i + k < m && mat[row][i - k] == mat[row][i + k])
+                {
+                    k++;
+                }
+                dH[row][i] = k--;
+                if (i + k > r)
+                {
+                    l = i - k;
+                    r = i + k;
+                }
+            }
         }
+        for (int col = 0; col < m; col++)
+        {
+            for (int i = 0, l = 0, r = -1; i < n; i++)
+            {
+                int k = (i > r) ? 1 : min(dV[l + r - i][col], r - i + 1ll);
+                while (0 <= i - k && i + k < n && mat[i - k][col] == mat[i + k][col])
+                {
+                    k++;
+                }
+                dV[i][col] = k--;
+                if (i + k > r)
+                {
+                    l = i - k;
+                    r = i + k;
+                }
+            }
+        }
+        lli sum = 0;
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<m;j++){
+                sum += min(dH[i][j],dV[i][j]);
+            }
+        }
+        cout<<sum<<endl;
+        // cout<<dV[1][2]<<endl;
     }
-    cout<<d1[1]<<endl;
-
     return 0;
 }
 

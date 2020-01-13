@@ -129,6 +129,7 @@ template<class T> struct Heap{
             insert(x);
         }
     }
+    
     void insert(T x){
         table.push_back(x);
         for(int i = table.size()-1;i != 0 && table[(i-1)/2] > table[i];){
