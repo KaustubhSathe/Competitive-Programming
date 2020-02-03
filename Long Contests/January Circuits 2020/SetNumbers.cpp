@@ -78,6 +78,21 @@ int main(){
     fastio;
     // freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
+    int tc;
+    cin>>tc;
+    while(tc--){
+       long long int n;cin>>n;
+       long long int itr = 0;
+       while((1ll<<itr) <= n){
+           itr++;
+       }
+       if((1ll<<itr) - 1 == n){
+           cout<<((1ll<<itr) - 1)<<endl;
+       }else{
+           itr--;
+           cout<<((1ll<<itr) - 1)<<endl;
+       }
+    }
 
     return 0;
 }

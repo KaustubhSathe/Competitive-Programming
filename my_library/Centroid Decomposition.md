@@ -1,3 +1,4 @@
+```cpp
 #include<bits/stdc++.h>
 #define pb push_back
 #define mp make_pair
@@ -58,20 +59,18 @@ int main(){
     int root_centroid_tree = decompose(1);
     return 0;
 }
-// Centroid Decomposition helps us to run dfs O(n) log(n)(one from each level in centroid tree).
-// Caution : the dfs run for calculating some property must be run in the corresponding part of the original tree and not in the centroid tree.
-// This helps us to calculate some given function(sum/multiply which can vary from problem to problem) between all pairs 
-// vertices efficiently. I.e by keeping the centroid as fixed and calculating the fucntion for all paths which pass through
-// the given centroid. When we do this for all centroid top to bottom then we can generate all the nC2 paths efficiently.
-// When the problem says calculate something for all pairs of vartices in the given tree, it is may be possible that
-// the given problem be solved using centroid decomposition.
+```
+-------------------------------------------------------------------------------------------------------------------
+ - Centroid Decomposition helps us to run dfs O(n) log(n)(one from each level in centroid tree).
+ - Caution : the dfs run for calculating some property must be run in the corresponding part of the original tree and not in the centroid tree.
+ - This helps us to calculate some given function(sum/multiply which can vary from problem to problem) between all pairs vertices efficiently. I.e by keeping the centroid as fixed and calculating the fucntion for all paths which pass through the given centroid. When we do this for all centroid top to bottom then we can generate all the nC2 paths efficiently.
+ - When the problem says calculate something for all pairs of vartices in the given tree, it is may be possible that the given problem be solved using centroid decomposition.
+-------------------------------------------------------------------------------------------------------------------
 
-
-/*************************************************** PROBLEMS ***************************************************/
-/*1. https://codeforces.com/problemset/problem/321/C 
-Solution : Simple application, just rank each level of centroid tree with same character. Lower level gets higher rank. 
-           If number of levels > 26 then Impossible.
-    
+## Problems
+1. **https://codeforces.com/problemset/problem/321/C** 
+    **Solution** : Simple application, just rank each level of centroid tree with same character. Lower level gets higher rank. If number of levels > 26 then Impossible.
+```cpp
     int n,max_level,color[1000000+5];
     vector<int> adj[1000000+5],centroid[1000000+5];
     bool is_centroid[1000000+5];
@@ -138,18 +137,14 @@ Solution : Simple application, just rank each level of centroid tree with same c
     
         return 0;
     }
-*/
+```
 
-/*2. https://codeforces.com/contest/342/problem/E
-Solution : Let dp[i] denote the minimum distance to red node in the subtree of centroid i in the centroid tree.
-           1. update query paint node x red : for all ancestors i of x do dp[i] = min(dp[i],dis(x,i));
-           Now this update takes log^2(n) time, but can be reduced to log(n) by using the optimization technique of caching
-           the distance between node i and all its ancestors. This distance 2d array can be constructed during the construction of 
-           centroid tree.
-           2. Finding nearest red node to node i : Let ans = INF, then for all ancestors x of i 
-           ans = min(ans,dis(i,x) + dp[x]), this will work because if the nearest red node is in the subtree of i
-           then dis(i,i) + dp[i] will give the minimum and all its ancestors will be greater than this.
+2. **https://codeforces.com/contest/342/problem/E**
+    **Solution** : Let dp[i] denote the minimum distance to red node in the subtree of centroid i in the centroid tree.
+    1. update query paint node x red : for all ancestors i of x do dp[i] = min(dp[i],dis(x,i)). Now this update takes log^2(n) time, but can be reduced to log(n) by using the optimization technique of caching the distance between node i and all its ancestors. This distance 2d array can be constructed during the construction of centroid tree.
+    2. Finding nearest red node to node i : Let ans = INF, then for all ancestors x of i ans = min(ans,dis(i,x) + dp[x]), this will work because if the nearest red node is in the subtree of i then dis(i,i) + dp[i] will give the minimum and all its ancestors will be greater than this.
 
+```cpp
     int n,m;
     vector<int> adj[100000+5];
     vector<int> centroid[100000+5];
@@ -235,15 +230,14 @@ Solution : Let dp[i] denote the minimum distance to red node in the subtree of c
             }
         }
         return 0;
-    }        
-*/
-
-/* 3. https://codeforces.com/contest/766/problem/E (Mahmoud and a xor trip)
-Solution : First get the centroid tree of the given tree.While decomposing the given tree maintain an array d[20][2],
-           which denotes number of vertices which have the digit at place i as 0 or 1 in d[i][0] and d[i][1].
-           Now add the xors of all the paths which pass through the given centroid.
+    }
+```        
 
 
+3. **https://codeforces.com/contest/766/problem/E (Mahmoud and a xor trip)**
+**Solution** : First get the centroid tree of the given tree.While decomposing the given tree maintain an array d[20][2], which denotes number of vertices which have the digit at place i as 0 or 1 in d[i][0] and d[i][1]. Now add the xors of all the paths which pass through the given centroid.
+
+```cpp
     int n;
     lli a[100000+5],ans,d[20][2];
     vector<int> adj[100000+5];
@@ -346,17 +340,15 @@ Solution : First get the centroid tree of the given tree.While decomposing the g
         
         return 0;
     }
-*/
+```
+    
 
-/* 4. https://codeforces.com/contest/161/problem/D
- Solution : There is dynamic programming solution to this problem(see this https://codeforces.com/contest/161/submission/66035427)
-            But let's solve this using centroid decomposition. While decomposing the given tree maintain an array called
-            d[50000+5] for every centroid (you don't actually need different array for every centroid as it won't be memory 
-            efficient, just use the same array declared globally for every centroid) in which d[i] denotes the number of 
-            paths of with length i ending at the current centroid.Then for every centroid run a dfs in its corresponding part
-            in the original tree(not in the centroid tree), and if we are at lvl = x then add cnt += d[k-x] to the global answer,and after adding 
-            update the given d[50000+5] array.
 
+4. **https://codeforces.com/contest/161/problem/D**
+ **Solution** : There is dynamic programming solution to this problem(see this https://codeforces.com/contest/161/submission/66035427).But let's solve this using centroid decomposition. While decomposing the given tree maintain an array called d[50000+5] for every centroid (you don't actually need different array for every centroid as it won't be memory efficient, just use the same array declared globally for every centroid) in which d[i] denotes the number of paths of with length i ending at the current centroid.Then for every centroid run a dfs in its corresponding part in the original tree(not in the centroid tree), and if we are at lvl = x then add cnt += d[k-x] to the global answer,and after adding update the given d[50000+5] array.
+
+    
+```cpp
     int n,k;
     unordered_map<int,int> d;
     lli ans;
@@ -439,16 +431,12 @@ Solution : First get the centroid tree of the given tree.While decomposing the g
         
         return 0;
     }
-*/
+```
 
+5. **https://www.hackerearth.com/problem/algorithm/number-of-paths-with-specific-length-f08e78de/**
+**Solution** : A dynamic programming solution exists but let's first solve it using centroid decomposition.
+```cpp
 
-/* 5. https://www.spoj.com/problems/QTREE5/
-Solution : Just keep a multiset for each centroid, and solve accordingly.
-
- 
-
-*/
-
-
+```
 
 
