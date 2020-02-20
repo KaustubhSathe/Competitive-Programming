@@ -6,7 +6,7 @@
 -----------------------------------------------------
 **Ways to calculate $\varphi(n)$** 
 
-1. For single input $n$ complexity $O(n)\;$: 
+1. For single input $n$ complexity $O(\sqrt{n})\;$: 
 ```cpp
 long long int phi(long long int n) {
     long long int result = n;
@@ -22,7 +22,7 @@ long long int phi(long long int n) {
     return result;
 }
 ```
-2. For calculating $\varphi(n)$ upto $n = 1e7$ we use sieve techinque.
+2. For calculating $\varphi(n)$ for each $n$ upto $1e7$ we use sieve techinque.
 ```cpp
 const int MAXN = 1e7+5;
 long long int phi[MAXN];memset(phi,0,sizeof(phi));
@@ -43,7 +43,7 @@ for(int i = 2;i<=MAXN;i++){
 
 -----------------------------------------------------
 ### Problems
- - **INVPHI - Smallest Inverse Euler Totient Function**
-   So in this problem we have to find smallest integer $i$ such that $\varphi(i) = n$. So to do this first calculate $\varphi(n)$ for $n <= 1e8$ using sieve technique. 
+**1. https://codeforces.com/problemset/problem/906/D**
+
 
    
