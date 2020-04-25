@@ -10,8 +10,8 @@
             "args": [
                 "-g",
                 "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-o"
             ],
             "options": {
                 "cwd": "/usr/bin"
